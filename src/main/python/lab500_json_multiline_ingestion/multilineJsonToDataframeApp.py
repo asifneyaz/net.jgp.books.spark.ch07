@@ -7,10 +7,8 @@ from pyspark.sql import SparkSession
 import os
 
 current_dir = os.path.dirname(__file__)
-print(current_dir)
 relative_path = "../../../../data/countrytravelinfo.json"
 absolute_file_path = os.path.join(current_dir, relative_path)
-print(absolute_file_path)
 
 # Creates a session on a local master
 spark = SparkSession.builder.appName("Multiline JSON to Dataframe") \
