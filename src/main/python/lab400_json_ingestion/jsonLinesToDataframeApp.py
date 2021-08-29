@@ -21,7 +21,7 @@ df = spark.read.format("json") \
         .load(absolute_file_path)
 
 # Shows at most 5 rows from the dataframe
-df.show(5)  # , 13)
+df.show(5, 80)  # , 13)
 
 df.printSchema()
 

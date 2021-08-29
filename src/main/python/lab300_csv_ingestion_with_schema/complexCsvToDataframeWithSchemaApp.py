@@ -1,8 +1,6 @@
-"""
- CSV ingestion in a dataframe with a Schema.
 
- @author rambabu.posa
-"""
+#CSV ingestion in a dataframe with a Schema.
+
 import os
 import json
 from pyspark.sql import SparkSession
@@ -20,9 +18,9 @@ spark = SparkSession.builder.appName("Complex CSV with a schema to Dataframe") \
 
 # Creates the schema
 schema = StructType([StructField('id', IntegerType(), False),
-                     StructField('authorId', IntegerType(), True),
-                     StructField('bookTitle', IntegerType(), False),
-                     StructField('releaseDate', DateType(), True),
+                     StructField('authorId', IntegerType(), False),
+                     StructField('bookTitle', StringType(), False),
+                     StructField('releaseDate', DateType(), False),
                      StructField('url', StringType(), False)])
 
 # Reads a CSV file with header, called books.csv, stores it in a
@@ -38,12 +36,13 @@ df = spark.read.format("csv") \
 
 
 # Shows at most 20 rows from the dataframe
-df.show(30, 25, False)
-df.printSchema()
 
-schemaAsJson = df.schema.json()
-parsedSchemaAsJson = json.loads(schemaAsJson)
+df.show(10, 80)
+schema_as_json = df.schema.json()
+print(schema_as_json)
+parsedSchemaAsJson = json.loads(schema_as_json)
+print(parsedSchemaAsJson)
 
-print("*** Schema as JSON: {}".format(json.dumps(parsedSchemaAsJson, indent=2)))
+print("Schema***{}".format((json.dumps(parsedSchemaAsJson, indent=4))))
 
 spark.stop()

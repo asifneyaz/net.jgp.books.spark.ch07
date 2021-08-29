@@ -29,7 +29,7 @@ df = df.withColumn("year", col("fields.year")) \
        .withColumn("coordinates", col("geometry.coordinates"))
 
 # Shows at most 5 rows from the dataframe
-df.show(5)
+df.show(5, 80)
 df.printSchema()
 
 spark.stop()
